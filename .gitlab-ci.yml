@@ -1,0 +1,13 @@
+image: docker
+
+services:
+  - docker:dind
+
+stages:
+  - deploy
+
+step-deploy-prod:
+  stage: deploy
+  script:
+     - docker build -t app/vue-project .
+     - docker run -d -p 8080:8080 --rm --name todoapp /app/vue-project
